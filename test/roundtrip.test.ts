@@ -28,7 +28,12 @@ const cases = [
   'pkg:golang/rsc.io/quote@v1.3.0',
   'pkg:golang/golang.org/x/xerrors@v0.0.0-20200804184101-5ec99f83aff1',
   'pkg:golang/cloud.google.com/go@v0.56.0',
-  'pkg:golang/github.com/kucherenkovova/gopypaste/xerrors@v0.1.1'
+  'pkg:golang/github.com/kucherenkovova/gopypaste/xerrors@v0.1.1',
+  // deb
+  'pkg:deb/debian/curl@7.50.3-1?arch=amd64',
+  'pkg:deb/debian/curl@7.50.3-1',
+  'pkg:deb/debian/attr@1:2.4.47-2?arch=source',
+  'pkg:deb/debian/base-files@12.4+deb12u10?arch=amd64'
 ]
 
 describe('PURL ↔ Coordinates roundtrip', () => {
