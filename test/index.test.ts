@@ -42,6 +42,7 @@ describe('converter registry', () => {
       ['github', 'pkg:github/myorg/foo@abc123'],
       ['maven', 'pkg:maven/org.foo/bar@1.0.0'],
       ['golang', 'pkg:golang/github.com/foo/bar@v1.0.0'],
+      ['deb', 'pkg:deb/debian/curl@7.50.3-1?arch=amd64'],
     ]
     for (const [type, purl] of cases) {
       await assert.doesNotReject(purlToCoordinates(purl), `Expected purl type ${type} to be registered`)
@@ -62,6 +63,8 @@ describe('converter registry', () => {
       { type: 'maven', provider: 'mavengoogle' },
       { type: 'maven', provider: 'gradleplugin' },
       { type: 'go', provider: 'golang' },
+      { type: 'deb', provider: 'debian' },
+      { type: 'debsrc', provider: 'debian' },
     ]
     for (const { type, provider } of supported) {
       assert.doesNotThrow(
