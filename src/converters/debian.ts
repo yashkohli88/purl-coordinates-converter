@@ -15,7 +15,7 @@ export async function toCoordinates(p: PackageURL): Promise<CoordinatesSpec> {
 
   const arch = p.qualifiers?.arch
   const isSource = arch === 'source'
-  const revision = isSource || !arch ? (p.version ?? undefined) : `${p.version}_${arch}`
+  const revision = isSource || !arch ? (p.version ?? undefined) : p.version ? `${p.version}_${arch}` : undefined
 
   return {
     type: isSource ? 'debsrc' : 'deb',
@@ -31,7 +31,7 @@ export function toPurl(c: CoordinatesSpec): PackageURL {
     return new PackageURL('deb', 'debian', c.name, c.revision, { arch: 'source' }, null)
   }
   if (!c.revision) {
-    return new PackageURL('deb', 'debian', c.name, c.revision ?? null, null, null)
+    return new PackageURL('deb', 'debian', c.name, null, null, null)
   }
   const lastUnderscore = c.revision.lastIndexOf('_')
   if (lastUnderscore === -1) {
