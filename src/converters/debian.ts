@@ -2,7 +2,11 @@
 // SPDX-License-Identifier: MIT
 
 import { PackageURL } from 'packageurl-js'
-import type { CoordinatesSpec, ConverterModule } from '../types.ts'
+import type { CoordinatesSpec } from '../types.ts'
+import type { ConverterModule } from '../types.ts'
+
+const PURL_TYPES = ['deb']
+const COORD_KEYS = ['deb:debian', 'debsrc:debian']
 
 const ALLOWED_QUALIFIERS = new Set(['arch', 'distro', 'upstream'])
 
@@ -28,7 +32,7 @@ export function toPurl(c: CoordinatesSpec): PackageURL {
     return new PackageURL('deb', 'debian', c.name, c.revision, { arch: 'source' }, null)
   }
   if (!c.revision) {
-    return new PackageURL('deb', 'debian', c.name, c.revision, null, null)
+    return new PackageURL('deb', 'debian', c.name, c.revision ?? null, null, null)
   }
   const lastUnderscore = c.revision.lastIndexOf('_')
   if (lastUnderscore === -1) {
@@ -40,8 +44,8 @@ export function toPurl(c: CoordinatesSpec): PackageURL {
 }
 
 export const converter: ConverterModule = {
-  purlTypes: ['deb'],
-  coordKeys: ['deb:debian', 'debsrc:debian'],
+  purlTypes: PURL_TYPES,
+  coordKeys: COORD_KEYS,
   toCoordinates,
   toPurl
 }
