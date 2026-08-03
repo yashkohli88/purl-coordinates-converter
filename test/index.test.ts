@@ -42,7 +42,7 @@ describe('converter registry', () => {
       ['github', 'pkg:github/myorg/foo@abc123'],
       ['maven', 'pkg:maven/org.foo/bar@1.0.0'],
       ['golang', 'pkg:golang/github.com/foo/bar@v1.0.0'],
-      ['deb', 'pkg:deb/debian/curl@7.50.3-1?arch=amd64'],
+      ['deb', 'pkg:deb/debian/curl@7.50.3-1?arch=amd64']
     ]
     for (const [type, purl] of cases) {
       await assert.doesNotReject(purlToCoordinates(purl), `Expected purl type ${type} to be registered`)
@@ -64,7 +64,7 @@ describe('converter registry', () => {
       { type: 'maven', provider: 'gradleplugin' },
       { type: 'go', provider: 'golang' },
       { type: 'deb', provider: 'debian' },
-      { type: 'debsrc', provider: 'debian' },
+      { type: 'debsrc', provider: 'debian' }
     ]
     for (const { type, provider } of supported) {
       assert.doesNotThrow(
@@ -76,7 +76,11 @@ describe('converter registry', () => {
 
   it('buildMap throws on duplicate key', () => {
     assert.throws(
-      () => buildMap([['npm', 1], ['npm', 2]] as [string, number][]),
+      () =>
+        buildMap([
+          ['npm', 1],
+          ['npm', 2]
+        ] as [string, number][]),
       /Duplicate converter key: npm/i
     )
   })
@@ -85,7 +89,13 @@ describe('converter registry', () => {
 describe('deb converter', () => {
   it('binary deb with arch and distro qualifier', async () => {
     const coords = await purlToCoordinates('pkg:deb/debian/curl@7.50.3-1?arch=amd64&distro=jessie')
-    assert.deepEqual(coords, { type: 'deb', provider: 'debian', namespace: '-', name: 'curl', revision: '7.50.3-1_amd64' })
+    assert.deepEqual(coords, {
+      type: 'deb',
+      provider: 'debian',
+      namespace: '-',
+      name: 'curl',
+      revision: '7.50.3-1_amd64'
+    })
   })
 
   it('binary deb without arch', async () => {
@@ -95,22 +105,48 @@ describe('deb converter', () => {
 
   it('source package via arch=source', async () => {
     const coords = await purlToCoordinates('pkg:deb/debian/attr@1:2.4.47-2?arch=source')
-    assert.deepEqual(coords, { type: 'debsrc', provider: 'debian', namespace: '-', name: 'attr', revision: '1:2.4.47-2' })
+    assert.deepEqual(coords, {
+      type: 'debsrc',
+      provider: 'debian',
+      namespace: '-',
+      name: 'attr',
+      revision: '1:2.4.47-2'
+    })
   })
 
   it('ubuntu namespace maps to debian provider', async () => {
     const coords = await purlToCoordinates('pkg:deb/ubuntu/procps@2:3.3.17-6ubuntu2.1?arch=amd64')
-    assert.deepEqual(coords, { type: 'deb', provider: 'debian', namespace: '-', name: 'procps', revision: '2:3.3.17-6ubuntu2.1_amd64' })
+    assert.deepEqual(coords, {
+      type: 'deb',
+      provider: 'debian',
+      namespace: '-',
+      name: 'procps',
+      revision: '2:3.3.17-6ubuntu2.1_amd64'
+    })
   })
 
   it('version with + character', async () => {
     const coords = await purlToCoordinates('pkg:deb/debian/base-files@12.4+deb12u10?arch=amd64')
-    assert.deepEqual(coords, { type: 'deb', provider: 'debian', namespace: '-', name: 'base-files', revision: '12.4+deb12u10_amd64' })
+    assert.deepEqual(coords, {
+      type: 'deb',
+      provider: 'debian',
+      namespace: '-',
+      name: 'base-files',
+      revision: '12.4+deb12u10_amd64'
+    })
   })
 
   it('upstream qualifier is silently dropped', async () => {
-    const coords = await purlToCoordinates('pkg:deb/debian/libgomp1@10.2.1-6?arch=amd64&distro=debian-11&upstream=gcc-10')
-    assert.deepEqual(coords, { type: 'deb', provider: 'debian', namespace: '-', name: 'libgomp1', revision: '10.2.1-6_amd64' })
+    const coords = await purlToCoordinates(
+      'pkg:deb/debian/libgomp1@10.2.1-6?arch=amd64&distro=debian-11&upstream=gcc-10'
+    )
+    assert.deepEqual(coords, {
+      type: 'deb',
+      provider: 'debian',
+      namespace: '-',
+      name: 'libgomp1',
+      revision: '10.2.1-6_amd64'
+    })
   })
 
   it('throws on unsupported qualifier', async () => {
@@ -118,17 +154,35 @@ describe('deb converter', () => {
   })
 
   it('coordinatesToPurl: deb with arch', () => {
-    const purl = coordinatesToPurl({ type: 'deb', provider: 'debian', namespace: '-', name: 'curl', revision: '7.50.3-1_amd64' })
+    const purl = coordinatesToPurl({
+      type: 'deb',
+      provider: 'debian',
+      namespace: '-',
+      name: 'curl',
+      revision: '7.50.3-1_amd64'
+    })
     assert.strictEqual(purl, 'pkg:deb/debian/curl@7.50.3-1?arch=amd64')
   })
 
   it('coordinatesToPurl: deb without arch', () => {
-    const purl = coordinatesToPurl({ type: 'deb', provider: 'debian', namespace: '-', name: 'curl', revision: '7.50.3-1' })
+    const purl = coordinatesToPurl({
+      type: 'deb',
+      provider: 'debian',
+      namespace: '-',
+      name: 'curl',
+      revision: '7.50.3-1'
+    })
     assert.strictEqual(purl, 'pkg:deb/debian/curl@7.50.3-1')
   })
 
   it('coordinatesToPurl: debsrc emits arch=source', () => {
-    const purl = coordinatesToPurl({ type: 'debsrc', provider: 'debian', namespace: '-', name: 'attr', revision: '1:2.4.47-2' })
+    const purl = coordinatesToPurl({
+      type: 'debsrc',
+      provider: 'debian',
+      namespace: '-',
+      name: 'attr',
+      revision: '1:2.4.47-2'
+    })
     assert.strictEqual(purl, 'pkg:deb/debian/attr@1:2.4.47-2?arch=source')
   })
 })

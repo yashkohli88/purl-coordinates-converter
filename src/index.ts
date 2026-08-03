@@ -4,8 +4,8 @@
 import { PackageURL } from 'packageurl-js'
 import { converter as cargo } from './converters/cargo.ts'
 import { converter as cocoapods } from './converters/cocoapods.ts'
-import { converter as debian } from './converters/debian.ts'
 import { converter as composer } from './converters/composer.ts'
+import { converter as debian } from './converters/debian.ts'
 import { converter as gem } from './converters/gem.ts'
 import { converter as github } from './converters/github.ts'
 import { converter as golang } from './converters/golang.ts'
@@ -17,7 +17,19 @@ import type { ConverterModule, CoordinatesSpec } from './types.ts'
 
 export type { CoordinatesSpec } from './types.ts'
 
-const allConverters: ConverterModule[] = [npm, pypi, cargo, gem, nuget, cocoapods, composer, github, maven, golang, debian]
+const allConverters: ConverterModule[] = [
+  npm,
+  pypi,
+  cargo,
+  gem,
+  nuget,
+  cocoapods,
+  composer,
+  github,
+  maven,
+  golang,
+  debian
+]
 
 export function buildMap<V>(entries: [string, V][]): Record<string, V> {
   const seen = new Set<string>()

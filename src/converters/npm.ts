@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 import { PackageURL } from 'packageurl-js'
-import type { CoordinatesSpec, ConverterModule } from '../types.ts'
+import type { ConverterModule, CoordinatesSpec } from '../types.ts'
 
 export async function toCoordinates(p: PackageURL): Promise<CoordinatesSpec> {
   if (p.qualifiers && Object.keys(p.qualifiers).length > 0)

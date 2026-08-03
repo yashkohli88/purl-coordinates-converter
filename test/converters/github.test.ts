@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 import { PackageURL } from 'packageurl-js'
-import { toCoordinates, toPurl } from '../../src/converters/github.ts'
-import { converter } from '../../src/converters/github.ts'
+import { converter, toCoordinates, toPurl } from '../../src/converters/github.ts'
 import type { ConverterModule } from '../../src/types.ts'
 
 describe('github converter', () => {

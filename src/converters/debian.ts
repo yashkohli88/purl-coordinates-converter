@@ -2,8 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 import { PackageURL } from 'packageurl-js'
-import type { CoordinatesSpec } from '../types.ts'
-import type { ConverterModule } from '../types.ts'
+import type { ConverterModule, CoordinatesSpec } from '../types.ts'
 
 const PURL_TYPES = ['deb']
 const COORD_KEYS = ['deb:debian', 'debsrc:debian']
