@@ -70,10 +70,6 @@ npm run lint    # type-check + biome lint
 npm run lint:fix
 ```
 
-## Contributing
-
-Part of the [ClearlyDefined](https://clearlydefined.io) project. Contributions welcome — see [CONTRIBUTING.md](../CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) in the parent repo.
-
 ## License
 
 [MIT](LICENSE)
