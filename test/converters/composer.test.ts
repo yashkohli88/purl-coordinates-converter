@@ -64,8 +64,8 @@ describe('composer converter', () => {
 describe('composer converter module', () => {
   it('implements ConverterModule interface', () => {
     const m: ConverterModule = converter
-    assert.deepStrictEqual(m.purlTypes, ['composer'])
-    assert.deepStrictEqual(m.coordKeys, ['composer:packagist'])
+    assert.deepStrictEqual(m.supportedPurlTypes, ['composer'])
+    assert.deepStrictEqual(m.supportedTypeProviderPairs, ['composer:packagist'])
     assert.strictEqual(typeof m.toCoordinates, 'function')
     assert.strictEqual(typeof m.toPurl, 'function')
   })

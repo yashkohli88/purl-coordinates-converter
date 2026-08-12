@@ -41,8 +41,8 @@ describe('github converter', () => {
 describe('github converter module', () => {
   it('implements ConverterModule interface', () => {
     const m: ConverterModule = converter
-    assert.deepStrictEqual(m.purlTypes, ['github'])
-    assert.deepStrictEqual(m.coordKeys, ['git:github'])
+    assert.deepStrictEqual(m.supportedPurlTypes, ['github'])
+    assert.deepStrictEqual(m.supportedTypeProviderPairs, ['git:github'])
     assert.strictEqual(typeof m.toCoordinates, 'function')
     assert.strictEqual(typeof m.toPurl, 'function')
   })

@@ -70,8 +70,8 @@ describe('pypi converter', () => {
 describe('pypi converter module', () => {
   it('implements ConverterModule interface', () => {
     const m: ConverterModule = converter
-    assert.deepStrictEqual(m.purlTypes, ['pypi'])
-    assert.deepStrictEqual(m.coordKeys, ['pypi:pypi'])
+    assert.deepStrictEqual(m.supportedPurlTypes, ['pypi'])
+    assert.deepStrictEqual(m.supportedTypeProviderPairs, ['pypi:pypi'])
     assert.strictEqual(typeof m.toCoordinates, 'function')
     assert.strictEqual(typeof m.toPurl, 'function')
   })

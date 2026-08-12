@@ -58,8 +58,8 @@ describe('nuget converter', () => {
 describe('nuget converter module', () => {
   it('implements ConverterModule interface', () => {
     const m: ConverterModule = converter
-    assert.deepStrictEqual(m.purlTypes, ['nuget'])
-    assert.deepStrictEqual(m.coordKeys, ['nuget:nuget'])
+    assert.deepStrictEqual(m.supportedPurlTypes, ['nuget'])
+    assert.deepStrictEqual(m.supportedTypeProviderPairs, ['nuget:nuget'])
     assert.strictEqual(typeof m.toCoordinates, 'function')
     assert.strictEqual(typeof m.toPurl, 'function')
   })

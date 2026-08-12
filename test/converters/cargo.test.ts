@@ -52,8 +52,8 @@ describe('cargo converter', () => {
 describe('cargo converter module', () => {
   it('implements ConverterModule interface', () => {
     const m: ConverterModule = converter
-    assert.deepStrictEqual(m.purlTypes, ['cargo'])
-    assert.deepStrictEqual(m.coordKeys, ['crate:cratesio'])
+    assert.deepStrictEqual(m.supportedPurlTypes, ['cargo'])
+    assert.deepStrictEqual(m.supportedTypeProviderPairs, ['crate:cratesio'])
     assert.strictEqual(typeof m.toCoordinates, 'function')
     assert.strictEqual(typeof m.toPurl, 'function')
   })

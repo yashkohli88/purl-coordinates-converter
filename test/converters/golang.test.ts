@@ -110,8 +110,8 @@ describe('golang converter', () => {
 describe('golang converter module', () => {
   it('implements ConverterModule interface', () => {
     const m: ConverterModule = converter
-    assert.deepStrictEqual(m.purlTypes, ['golang'])
-    assert.deepStrictEqual(m.coordKeys, ['go:golang'])
+    assert.deepStrictEqual(m.supportedPurlTypes, ['golang'])
+    assert.deepStrictEqual(m.supportedTypeProviderPairs, ['go:golang'])
     assert.strictEqual(typeof m.toCoordinates, 'function')
     assert.strictEqual(typeof m.toPurl, 'function')
   })

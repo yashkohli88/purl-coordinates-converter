@@ -48,8 +48,8 @@ export interface CoordinatesSpec {
 }
 
 export interface ConverterModule {
-  purlTypes: string[]
-  coordKeys: string[]
+  supportedPurlTypes: string[]
+  supportedTypeProviderPairs: string[]
   toCoordinates: (p: PackageURL) => Promise<CoordinatesSpec>
   toPurl: (c: CoordinatesSpec) => PackageURL
 }

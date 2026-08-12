@@ -35,8 +35,8 @@ describe('gem converter', () => {
 describe('gem converter module', () => {
   it('implements ConverterModule interface', () => {
     const m: ConverterModule = converter
-    assert.deepStrictEqual(m.purlTypes, ['gem'])
-    assert.deepStrictEqual(m.coordKeys, ['gem:rubygems'])
+    assert.deepStrictEqual(m.supportedPurlTypes, ['gem'])
+    assert.deepStrictEqual(m.supportedTypeProviderPairs, ['gem:rubygems'])
     assert.strictEqual(typeof m.toCoordinates, 'function')
     assert.strictEqual(typeof m.toPurl, 'function')
   })

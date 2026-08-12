@@ -46,8 +46,8 @@ describe('npm converter', () => {
 describe('npm converter module', () => {
   it('implements ConverterModule interface', () => {
     const m: ConverterModule = converter
-    assert.deepStrictEqual(m.purlTypes, ['npm'])
-    assert.deepStrictEqual(m.coordKeys, ['npm:npmjs'])
+    assert.deepStrictEqual(m.supportedPurlTypes, ['npm'])
+    assert.deepStrictEqual(m.supportedTypeProviderPairs, ['npm:npmjs'])
     assert.strictEqual(typeof m.toCoordinates, 'function')
     assert.strictEqual(typeof m.toPurl, 'function')
   })

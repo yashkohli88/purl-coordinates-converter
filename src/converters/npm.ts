@@ -21,8 +21,8 @@ export function toPurl(c: CoordinatesSpec): PackageURL {
 }
 
 export const converter: ConverterModule = {
-  purlTypes: ['npm'],
-  coordKeys: ['npm:npmjs'],
+  supportedPurlTypes: ['npm'],
+  supportedTypeProviderPairs: ['npm:npmjs'],
   toCoordinates,
   toPurl
 }

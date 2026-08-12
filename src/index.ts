@@ -41,11 +41,11 @@ export function buildMap<V>(entries: [string, V][]): Record<string, V> {
 }
 
 const converters = buildMap(
-  allConverters.flatMap(c => c.purlTypes.map(t => [t, c.toCoordinates] as [string, typeof c.toCoordinates]))
+  allConverters.flatMap(c => c.supportedPurlTypes.map(t => [t, c.toCoordinates] as [string, typeof c.toCoordinates]))
 )
 
 const reverseConverters = buildMap(
-  allConverters.flatMap(c => c.coordKeys.map(k => [k, c.toPurl] as [string, typeof c.toPurl]))
+  allConverters.flatMap(c => c.supportedTypeProviderPairs.map(k => [k, c.toPurl] as [string, typeof c.toPurl]))
 )
 
 export async function purlToCoordinates(purl: string): Promise<CoordinatesSpec> {

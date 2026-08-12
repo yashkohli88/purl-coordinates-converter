@@ -4,8 +4,8 @@
 import { PackageURL } from 'packageurl-js'
 import type { ConverterModule, CoordinatesSpec } from '../types.ts'
 
-const PURL_TYPES = ['golang']
-const COORD_KEYS = ['go:golang']
+const supportedPurlTypes = ['golang']
+const supportedTypeProviderPairs = ['go:golang']
 
 export async function toCoordinates(p: PackageURL): Promise<CoordinatesSpec> {
   if (p.qualifiers && Object.keys(p.qualifiers).length > 0)
@@ -25,8 +25,8 @@ export function toPurl(c: CoordinatesSpec): PackageURL {
 }
 
 export const converter: ConverterModule = {
-  purlTypes: PURL_TYPES,
-  coordKeys: COORD_KEYS,
+  supportedPurlTypes: supportedPurlTypes,
+  supportedTypeProviderPairs: supportedTypeProviderPairs,
   toCoordinates,
   toPurl
 }

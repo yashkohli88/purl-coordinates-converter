@@ -4,8 +4,8 @@
 import { PackageURL } from 'packageurl-js'
 import type { ConverterModule, CoordinatesSpec } from '../types.ts'
 
-const PURL_TYPES = ['deb']
-const COORD_KEYS = ['deb:debian', 'debsrc:debian']
+const supportedPurlTypes = ['deb']
+const supportedTypeProviderPairs = ['deb:debian', 'debsrc:debian']
 
 const ALLOWED_QUALIFIERS = new Set(['arch', 'distro', 'upstream'])
 
@@ -43,8 +43,8 @@ export function toPurl(c: CoordinatesSpec): PackageURL {
 }
 
 export const converter: ConverterModule = {
-  purlTypes: PURL_TYPES,
-  coordKeys: COORD_KEYS,
+  supportedPurlTypes: supportedPurlTypes,
+  supportedTypeProviderPairs: supportedTypeProviderPairs,
   toCoordinates,
   toPurl
 }

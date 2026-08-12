@@ -4,8 +4,8 @@
 import { PackageURL } from 'packageurl-js'
 import type { ConverterModule, CoordinatesSpec } from '../types.ts'
 
-const PURL_TYPES = ['cocoapods']
-const COORD_KEYS = ['pod:cocoapods']
+const supportedPurlTypes = ['cocoapods']
+const supportedTypeProviderPairs = ['pod:cocoapods']
 
 export async function toCoordinates(p: PackageURL): Promise<CoordinatesSpec> {
   if (p.qualifiers && Object.keys(p.qualifiers).length > 0)
@@ -18,8 +18,8 @@ export function toPurl(c: CoordinatesSpec): PackageURL {
 }
 
 export const converter: ConverterModule = {
-  purlTypes: PURL_TYPES,
-  coordKeys: COORD_KEYS,
+  supportedPurlTypes: supportedPurlTypes,
+  supportedTypeProviderPairs: supportedTypeProviderPairs,
   toCoordinates,
   toPurl
 }

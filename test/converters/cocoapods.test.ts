@@ -35,8 +35,8 @@ describe('cocoapods converter', () => {
 describe('cocoapods converter module', () => {
   it('implements ConverterModule interface', () => {
     const m: ConverterModule = converter
-    assert.deepStrictEqual(m.purlTypes, ['cocoapods'])
-    assert.deepStrictEqual(m.coordKeys, ['pod:cocoapods'])
+    assert.deepStrictEqual(m.supportedPurlTypes, ['cocoapods'])
+    assert.deepStrictEqual(m.supportedTypeProviderPairs, ['pod:cocoapods'])
     assert.strictEqual(typeof m.toCoordinates, 'function')
     assert.strictEqual(typeof m.toPurl, 'function')
   })

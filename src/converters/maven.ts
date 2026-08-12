@@ -4,8 +4,8 @@
 import { PackageURL } from 'packageurl-js'
 import type { ConverterModule, CoordinatesSpec, CoordinatesProvider } from '../types.ts'
 
-const PURL_TYPES = ['maven']
-const COORD_KEYS = [
+const supportedPurlTypes = ['maven']
+const supportedTypeProviderPairs = [
   'maven:mavencentral',
   'maven:mavengoogle',
   'maven:gradleplugin',
@@ -58,8 +58,8 @@ export function toPurl(c: CoordinatesSpec): PackageURL {
 }
 
 export const converter: ConverterModule = {
-  purlTypes: PURL_TYPES,
-  coordKeys: COORD_KEYS,
+  supportedPurlTypes: supportedPurlTypes,
+  supportedTypeProviderPairs: supportedTypeProviderPairs,
   toCoordinates,
   toPurl
 }
