@@ -186,7 +186,14 @@ describe('maven converter module', () => {
   it('implements ConverterModule interface', () => {
     const m: ConverterModule = converter
     assert.deepStrictEqual(m.purlTypes, ['maven'])
-    assert.deepStrictEqual(m.coordKeys, ['maven:mavencentral', 'maven:mavengoogle', 'maven:gradleplugin'])
+    assert.deepStrictEqual(m.coordKeys, [
+      'maven:mavencentral',
+      'maven:mavengoogle',
+      'maven:gradleplugin',
+      'sourcearchive:mavencentral',
+      'sourcearchive:mavengoogle',
+      'sourcearchive:gradleplugin'
+    ])
     assert.strictEqual(typeof m.toCoordinates, 'function')
     assert.strictEqual(typeof m.toPurl, 'function')
   })

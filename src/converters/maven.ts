@@ -2,12 +2,19 @@
 // SPDX-License-Identifier: MIT
 
 import { PackageURL } from 'packageurl-js'
-import type { ConverterModule, CoordinatesSpec } from '../types.ts'
+import type { ConverterModule, CoordinatesSpec, CoordinatesProvider } from '../types.ts'
 
 const PURL_TYPES = ['maven']
-const COORD_KEYS = ['maven:mavencentral', 'maven:mavengoogle', 'maven:gradleplugin']
+const COORD_KEYS = [
+  'maven:mavencentral',
+  'maven:mavengoogle',
+  'maven:gradleplugin',
+  'sourcearchive:mavencentral',
+  'sourcearchive:mavengoogle',
+  'sourcearchive:gradleplugin'
+]
 
-const REPO_TO_PROVIDER: Record<string, string> = {
+const REPO_TO_PROVIDER: Record<string, CoordinatesProvider> = {
   'https://repo.maven.apache.org/maven2/': 'mavencentral',
   'https://repo1.maven.org/maven2/': 'mavencentral',
   'https://maven.google.com': 'mavengoogle',
@@ -28,7 +35,7 @@ export async function toCoordinates(p: PackageURL): Promise<CoordinatesSpec> {
   if (classifier && classifier !== 'sources') throw new Error(`Unsupported classifier: ${classifier}`)
 
   const repoUrl = p.qualifiers && 'repository_url' in p.qualifiers ? p.qualifiers.repository_url : undefined
-  const provider = (repoUrl && REPO_TO_PROVIDER[repoUrl]) ?? 'mavencentral'
+  const provider: CoordinatesProvider = (repoUrl ? REPO_TO_PROVIDER[repoUrl] : undefined) ?? 'mavencentral'
 
   if (!p.namespace) throw new Error(`Maven PURL requires a namespace: ${p.toString()}`)
   const type = classifier === 'sources' ? 'sourcearchive' : 'maven'
