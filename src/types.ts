@@ -3,9 +3,45 @@
 
 import type { PackageURL } from 'packageurl-js'
 
+export type CoordinatesType =
+  | 'npm'
+  | 'conda'
+  | 'condasrc'
+  | 'crate'
+  | 'git'
+  | 'maven'
+  | 'composer'
+  | 'nuget'
+  | 'gem'
+  | 'go'
+  | 'pod'
+  | 'pypi'
+  | 'sourcearchive'
+  | 'deb'
+  | 'debsrc'
+
+export type CoordinatesProvider =
+  | 'anaconda-main'
+  | 'anaconda-r'
+  | 'npmjs'
+  | 'cocoapods'
+  | 'conda-forge'
+  | 'cratesio'
+  | 'github'
+  | 'gitlab'
+  | 'packagist'
+  | 'golang'
+  | 'mavencentral'
+  | 'mavengoogle'
+  | 'gradleplugin'
+  | 'nuget'
+  | 'rubygems'
+  | 'pypi'
+  | 'debian'
+
 export interface CoordinatesSpec {
-  type: string
-  provider: string
+  type: CoordinatesType
+  provider: CoordinatesProvider
   namespace: string
   name: string
   revision: string | undefined
