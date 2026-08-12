@@ -4,6 +4,9 @@
 import { PackageURL } from 'packageurl-js'
 import type { ConverterModule, CoordinatesSpec } from '../types.ts'
 
+const supportedPurlTypes = ['npm']
+const supportedTypeProviderPairs = ['npm:npmjs']
+
 export async function toCoordinates(p: PackageURL): Promise<CoordinatesSpec> {
   if (p.qualifiers && Object.keys(p.qualifiers).length > 0)
     throw new Error(`PURL qualifiers are not supported for type: ${p.type}`)
@@ -21,8 +24,8 @@ export function toPurl(c: CoordinatesSpec): PackageURL {
 }
 
 export const converter: ConverterModule = {
-  supportedPurlTypes: ['npm'],
-  supportedTypeProviderPairs: ['npm:npmjs'],
+  supportedPurlTypes,
+  supportedTypeProviderPairs,
   toCoordinates,
   toPurl
 }
