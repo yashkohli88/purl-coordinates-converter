@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 import { buildMap, coordinatesToPurl, purlToCoordinates } from '../src/index.ts'
+import type { CoordinatesProvider, CoordinatesType } from '../src/types.ts'
 
 describe('purlToCoordinates', () => {
   it('throws on invalid purl string', async () => {
@@ -23,7 +24,15 @@ describe('purlToCoordinates', () => {
 describe('coordinatesToPurl', () => {
   it('throws with /unsupported/i on unknown type/provider', () => {
     assert.throws(
-      () => coordinatesToPurl({ type: 'unknown', provider: 'unknown', namespace: '-', name: 'foo', revision: '1.0' }),
+      () =>
+        coordinatesToPurl({
+          type: 'unknown',
+          provider: 'unknown',
+          namespace: '-',
+          name: 'foo',
+          revision: '1.0'
+          // biome-ignore lint/suspicious/noExplicitAny: Testing error handling with invalid types
+        } as any),
       /unsupported/i
     )
   })
@@ -68,7 +77,14 @@ describe('converter registry', () => {
     ]
     for (const { type, provider } of supported) {
       assert.doesNotThrow(
-        () => coordinatesToPurl({ type, provider, namespace: 'ns', name: 'foo', revision: '1.0.0' }),
+        () =>
+          coordinatesToPurl({
+            type: type as CoordinatesType,
+            provider: provider as CoordinatesProvider,
+            namespace: 'ns',
+            name: 'foo',
+            revision: '1.0.0'
+          }),
         `Expected coord key ${type}:${provider} to be registered`
       )
     }
