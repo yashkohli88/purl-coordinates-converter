@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 import { PackageURL } from 'packageurl-js'
-import type { ConverterModule, CoordinatesSpec, CoordinatesType, CoordinatesProvider } from '../types.ts'
+import type { ConverterModule, CoordinatesProvider, CoordinatesSpec, CoordinatesType } from '../types.ts'
 
 interface SimpleConverterOptions {
   purlType: string
@@ -19,8 +19,7 @@ export function makeConverter(opts: SimpleConverterOptions): ConverterModule {
   async function toCoordinates(p: PackageURL): Promise<CoordinatesSpec> {
     if (p.qualifiers && Object.keys(p.qualifiers).length > 0)
       throw new Error(`PURL qualifiers are not supported for type: ${p.type}`)
-    if (requireNamespace && !p.namespace)
-      throw new Error(`${purlType} PURL requires a namespace: ${p.toString()}`)
+    if (requireNamespace && !p.namespace) throw new Error(`${purlType} PURL requires a namespace: ${p.toString()}`)
     const namespace = namespacePolicy === 'from-purl' ? (p.namespace ?? '-') : '-'
     const name = normalizeName ? normalizeName(p.name) : p.name
     return { type: cdType, provider, namespace, name, revision: p.version ?? undefined }

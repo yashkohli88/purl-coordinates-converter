@@ -38,7 +38,13 @@ describe('makeConverter — namespacePolicy: from-purl', () => {
 
 describe('makeConverter — requireNamespace', () => {
   it('throws when namespace is absent and requireNamespace is true', async () => {
-    const c = makeConverter({ purlType: 'golang', cdType: 'go', provider: 'golang', namespacePolicy: 'from-purl', requireNamespace: true })
+    const c = makeConverter({
+      purlType: 'golang',
+      cdType: 'go',
+      provider: 'golang',
+      namespacePolicy: 'from-purl',
+      requireNamespace: true
+    })
     const p = new PackageURL('golang', null, 'fmt', 'v1.0.0', null, null)
     await assert.rejects(c.toCoordinates(p), /golang PURL requires a namespace/)
   })
@@ -47,7 +53,10 @@ describe('makeConverter — requireNamespace', () => {
 describe('makeConverter — normalizeName', () => {
   it('applies name transform when provided', async () => {
     const c = makeConverter({
-      purlType: 'pypi', cdType: 'pypi', provider: 'pypi', namespacePolicy: 'fixed-dash',
+      purlType: 'pypi',
+      cdType: 'pypi',
+      provider: 'pypi',
+      namespacePolicy: 'fixed-dash',
       normalizeName: n => n.toLowerCase().replace(/_/g, '-')
     })
     const p = PackageURL.fromString('pkg:pypi/My_Package@1.0.0')

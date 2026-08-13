@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 import { PackageURL } from 'packageurl-js'
-import type { ConverterModule, CoordinatesSpec, CoordinatesProvider } from '../types.ts'
+import type { ConverterModule, CoordinatesProvider, CoordinatesSpec } from '../types.ts'
 
 const PURL_TYPES = ['maven']
 const COORD_KEYS = [
