@@ -1,0 +1,12 @@
+{
+  "extends": ["@tsconfig/strictest/tsconfig.json", "@tsconfig/node20/tsconfig.json", "@tsconfig/node-ts/tsconfig.json"],
+  "compilerOptions": {
+    "allowJs": false,
+    "noEmit": true,
+    "exactOptionalPropertyTypes": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "verbatimModuleSyntax": true,
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts"]
+}
